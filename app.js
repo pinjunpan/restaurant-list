@@ -12,6 +12,8 @@ app.set('view engine', '.hbs');
 app.set('views', './views');
 app.use(express.static('public'))
 
+app.use(express.urlencoded({ extended: true }))
+
 app.get('/', (req, res) => {
   res.redirect('/restaurants')
 })
@@ -38,11 +40,25 @@ app.get('/restaurants', (req, res) => {
 })
 
 app.get('/restaurants/new', (req, res) => {
-  res.send('create restaurant')
+  return res.render('new')
 })
 
 app.post('/restaurants', (req, res) => {
-  res.send('add restaurant')
+  const body = req.body
+
+  return Restaurant.create({
+    name: body.name,
+    name_en: body.name_en,
+    category: body.category,
+    image: body.image,
+    location: body.location,
+    phone: body.phone,
+    google_map: body.google_map,
+    rating: body.rating,
+    description: body.description
+  })
+    .then(() => res.redirect('/restaurants'))
+    .catch((err) => console.log(err))
 })
 
 app.get('/restaurants/:id', (req, res) => {
