@@ -1,13 +1,12 @@
 # Restaurant List
-An application that allows users to browse and search for restaurants.
+Create an application server using Node.js with Express and a database server using MySQL in the local environment.
++ Dev C4 M1：Connect to the MySQL database and add CRUD functionality.
 ## Features
-+ Users can browse basic information about all restaurants on the homepage.
++ Users can retrieve information about all restaurants from the database.
++ Users can add, edit, and delete restaurant data.
 + Users can view detailed information about a specific restaurant.
 + Users can find a specific restaurant by searching for its name or category.
-![image](https://github.com/pinjunpan/restaurant-list/blob/main/public/images/home.png)
-![image](https://github.com/pinjunpan/restaurant-list/blob/main/public/images/detail.png)
-![image](https://github.com/pinjunpan/restaurant-list/blob/main/public/images/search_name.png)
-![image](https://github.com/pinjunpan/restaurant-list/blob/main/public/images/search_category.png)
+![image](https://github.com/pinjunpan/restaurant-list/blob/main/public/images/main.png)
 ## Getting Started
 ### Prerequisites
 + Node.js v20.15.1
@@ -16,6 +15,10 @@ An application that allows users to browse and search for restaurants.
 + Express-handlebars v7.1.3
 + Bootstrap v5.1.3
 + Font Awesome v6.6.0
++ mysql2 v3.2.0
++ sequelize v6.30.0
++ sequelize-cli v6.6.0
++ method-override v3.0.0
 ### Installing
 1. Enter in the terminal
 ```
