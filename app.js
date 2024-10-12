@@ -18,21 +18,23 @@ app.get('/', (req, res) => {
 
 app.get('/restaurants', (req, res) => {
   const keyword = req.query.keyword?.trim()
-  const matchedRestaurant = keyword?restaurants.filter((restaurant) => 
-    Object.keys(restaurant).some((property) => {
-      if(property === 'name' || property === 'name_en' || property === 'category'){
-        return restaurant[property].toLowerCase().includes(keyword.toLowerCase())
-      }
-      return false
-    }) 
-  ) :restaurants
-  res.render('index', {restaurants: matchedRestaurant, keyword})
-})
 
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  const restaurant = restaurants.find((restaurant) => restaurant.id.toString() === id)
-  res.render('detail', {restaurant})
+  return Restaurant.findAll({
+      attribute: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],  
+      raw: true
+    })
+    .then((restaurants) => {
+      const matchedRestaurant = keyword?restaurants.filter((restaurant) => 
+        Object.keys(restaurant).some((property) => {
+          if(property === 'name' || property === 'name_en' || property === 'category'){
+            return restaurant[property].toLowerCase().includes(keyword.toLowerCase())
+          }
+          return false
+        }) 
+      ) :restaurants
+      res.render('index', {restaurants: matchedRestaurant, keyword})
+    })
+    .catch((err) => console.log(err))
 })
 
 app.get('/restaurants/new', (req, res) => {
@@ -41,6 +43,12 @@ app.get('/restaurants/new', (req, res) => {
 
 app.post('/restaurants', (req, res) => {
   res.send('add restaurant')
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  const restaurant = restaurants.find((restaurant) => restaurant.id.toString() === id)
+  res.render('detail', {restaurant})
 })
 
 app.get('/restaurants/:id/edit', (req, res) => {
