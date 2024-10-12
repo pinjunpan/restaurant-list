@@ -1,3 +1,9 @@
+{{#if errorMessage}}
+<div class="alert alert-danger">
+  {{errorMessage}}
+</div>
+{{/if}}
+
 <div class="container mt-3 d-flex justify-content-center">
   <div class="row">
     <form action="/restaurants/{{restaurant.id}}?_method=PUT" method="POST">

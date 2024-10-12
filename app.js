@@ -48,6 +48,12 @@ app.get('/restaurants/new', (req, res) => {
 app.post('/restaurants', (req, res) => {
   const body = req.body
 
+  if(!body.name || !body.category){
+    return res.render('new', {
+      errorMessage: 'Name and Category are required fields.'
+    })
+  }
+
   return Restaurant.create({
     name: body.name,
     name_en: body.name_en,
@@ -88,6 +94,16 @@ app.get('/restaurants/:id/edit', (req, res) => {
 app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const body = req.body
+
+  if(!body.name || !body.category){
+    return Restaurant.findByPk(id, {
+      attribute: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],  
+      raw: true
+    })
+      .then((restaurant) => res.render('edit', {restaurant,
+        errorMessage: 'Name and Category are required fields.'
+      }))
+  }
 
   return Restaurant.update({
     name: body.name,
