@@ -7,9 +7,9 @@ const restaurants = require('./public/jsons/restaurant.json').results
 
 const router = require('./routes')
 
-app.engine('.hbs', engine({extname: '.hbs'}));
-app.set('view engine', '.hbs');
-app.set('views', './views');
+app.engine('.hbs', engine({ extname: '.hbs' }))
+app.set('view engine', '.hbs')
+app.set('views', './views')
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 
