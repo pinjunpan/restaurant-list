@@ -62,3 +62,17 @@
     </div>
   </div>
 </div>
+
+<div class="mb-3">
+  <div class="d-flex justify-content-center">
+    <form action="/restaurants" method="GET" style="display: inline;" >
+      <input type="hidden" name="page" value="{{prev}}">
+      <button type="submit" class="btn btn-outline-secondary me-2">prev</button>
+    </form>
+    <form action="/restaurants" method="GET" style="display: inline;">
+      <input type="hidden" name="page" value="{{next}}">
+      <button type="submit" class="btn btn-outline-secondary me-2">next</button>
+    </form>
+    <span class="mt-1">page: {{page}}</span>
+  </div>
+</div>

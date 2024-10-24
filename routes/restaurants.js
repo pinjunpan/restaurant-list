@@ -6,9 +6,13 @@ const Restaurant = db.Restaurant
 
 router.get('/', (req, res, next) => {
   const keyword = req.query.keyword?.trim()
+  const page = parseInt(req.query.page) || 1
+  const limit = 6
 
   return Restaurant.findAll({
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+    offset: (page - 1) * limit,
+    limit,
     raw: true
   })
     .then((restaurants) => {
@@ -22,7 +26,13 @@ router.get('/', (req, res, next) => {
           })
         )
         : restaurants
-      res.render('index', { restaurants: matchedRestaurant, keyword })
+      res.render('index', { 
+        restaurants: matchedRestaurant, 
+        keyword, 
+        prev: page > 1 ? page - 1 : page,
+        next: page + 1,
+        page 
+      })
     })
     .catch((error) => {
       error.errorMessage = '資料取得失敗：（'
