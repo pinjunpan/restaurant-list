@@ -8,30 +8,49 @@ router.get('/', (req, res, next) => {
   const keyword = req.query.keyword?.trim()
   const page = parseInt(req.query.page) || 1
   const limit = 6
+  const sortBy = req.query.sort || 'default'
+
+  let sortOptions = []
+  switch (sortBy) {
+    case 'A->Z':
+      sortOptions.push(['name_en', 'ASC'])
+      break
+    case 'Z->A':
+      sortOptions.push(['name_en', 'DESC'])
+      break
+    case '類別':
+      sortOptions.push(['category', 'ASC'])
+      break
+    case '地區':
+      sortOptions.push(['location', 'ASC'])
+      break
+    default:
+      sortOptions = []
+  }
 
   return Restaurant.findAll({
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
     offset: (page - 1) * limit,
     limit,
+    order: sortOptions,
     raw: true
   })
     .then((restaurants) => {
       const matchedRestaurant = keyword
         ? restaurants.filter((restaurant) =>
-          Object.keys(restaurant).some((property) => {
-            if (property === 'name' || property === 'name_en' || property === 'category') {
-              return restaurant[property].toLowerCase().includes(keyword.toLowerCase())
-            }
-            return false
-          })
+          ['name', 'name_en', 'category'].some((property) =>
+            restaurant[property].toLowerCase().includes(keyword.toLowerCase())
+          )
         )
         : restaurants
-      res.render('index', { 
-        restaurants: matchedRestaurant, 
-        keyword, 
+
+      res.render('index', {
+        restaurants: matchedRestaurant,
+        keyword,
+        sortBy,
         prev: page > 1 ? page - 1 : page,
         next: page + 1,
-        page 
+        page
       })
     })
     .catch((error) => {

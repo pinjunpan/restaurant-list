@@ -1,25 +1,34 @@
 {{> message}}
 <!-- search bar -->
 <div class="container">
-  <div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
     <form action="./restaurants/new" method="GET">
       <button type="submit" class="btn btn-outline-warning">Add New Restaurant</button>
     </form>
-  </div>
-  <div class="container search-bar">
-    <div class="search-bar-outer">
-      <div class="search-bar-inner">
-        <form action="/restaurants">
-          <h4 class="mb-2">尋找餐廳：</h4>
-          <div class="input-group">
-            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." aria-describedby="search-button" value="{{keyword}}">
-            <div class="input-group-append">
-              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    <div class="search-bar">
+      <div class="search-bar-outer">
+        <div class="search-bar-inner">
+          <form action="/restaurants">
+            <h4 class="mb-2">尋找餐廳：</h4>
+            <div class="input-group">
+              <input type="text" name="keyword" class="form-control form-control-lg" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." aria-describedby="search-button" value="{{keyword}}">
+              <div class="input-group-append">
+                <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
+    <form action="/restaurants" method="GET" >
+      <select name="sort" class="form-select" onchange="this.form.submit()">
+        <option value="default" {{selected sortBy 'default' }}>Sort</option>
+        <option value="A->Z" {{selected sortBy 'A->Z' }}>A->Z</option>
+        <option value="Z->A" {{selected sortBy 'Z->A' }}>Z->A</option>
+        <option value="類別" {{selected sortBy '類別' }}>類別</option>
+        <option value="地區" {{selected sortBy '地區' }}>地區</option>
+      </select>
+    </form>  
   </div>
 </div>
 
