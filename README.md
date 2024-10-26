@@ -6,6 +6,7 @@ Create an application server using Node.js with Express and a database server us
 + Users can add, edit, and delete restaurant data.
 + Users can view detailed information about a specific restaurant.
 + Users can find a specific restaurant by searching for its name or category.
++ Users can sort restaurants using a dropdown box format.
 ![image](https://github.com/pinjunpan/restaurant-list/blob/main/public/images/main.png)
 ## Getting Started
 ### Prerequisites
