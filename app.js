@@ -7,6 +7,8 @@ const helpers = require('./helpers/handlebars-helpers')
 const app = express()
 const port = 3000
 
+const passport = require('passport')
+
 const messageHandler = require('./middlewares/message-handler')
 const errorHandler = require('./middlewares/error-handler')
 
@@ -26,6 +28,8 @@ app.use(session({
   saveUninitialized: false
 }))
 app.use(flash())
+
+app.use(passport.initialize())
 
 app.use(messageHandler)
 
