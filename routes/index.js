@@ -43,7 +43,7 @@ router.use('/restaurants', authHandler, restaurants)
 router.use('/users', users)
 
 router.get('/', (req, res) => {
-  res.redirect('/login')
+  res.redirect('/restaurants')
 })
 
 router.get('/register', (req, res) => {
