@@ -20,7 +20,7 @@ module.exports = {
           password: hash,
           createdAt: new Date(),
           updatedAt: new Date()
-        },{
+        }, {
           id: 2,
           name: 'user2',
           email: 'user2@example.com',
@@ -31,12 +31,12 @@ module.exports = {
       )
       await queryInterface.bulkInsert('Restaurants', restaurants.map((restaurant, i) => {
         const userId = i < 4 ? 1 : 2
-          return {
-            ...restaurant,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            userId: userId
-          }
+        return {
+          ...restaurant,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId
+        }
       }), { transaction }
       )
 

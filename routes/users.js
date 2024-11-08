@@ -8,29 +8,28 @@ const User = db.User
 router.post('/', (req, res, next) => {
   const { name, email, password, confirmPassword } = req.body
 
-  if(!email || !password){
+  if (!email || !password) {
     req.flash('error', 'email 及密碼為必填')
     return res.redirect('back')
   }
 
-  if(password !== confirmPassword){
+  if (password !== confirmPassword) {
     req.flash('error', '驗證密碼與密碼不符')
     return res.redirect('back')
   }
 
-  return User.count({where: { email }})
+  return User.count({ where: { email } })
     .then((rowCount) => {
-      if(rowCount > 0){
+      if (rowCount > 0) {
         req.flash('error', 'email 已註冊')
         return
       }
 
       return bcrypt.hash(password, 10)
         .then((hash) => User.create({ name, email, password: hash }))
-
     })
     .then((user) => {
-      if(!user){
+      if (!user) {
         return res.redirect('back')
       }
 

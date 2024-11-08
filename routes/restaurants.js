@@ -106,11 +106,11 @@ router.get('/:id', (req, res, next) => {
     raw: true
   })
     .then((restaurant) => {
-      if(!restaurant){
+      if (!restaurant) {
         req.flash('error', '找不到資料')
         return res.redirect('/restaurants')
       }
-      if(restaurant.userId !== userId){
+      if (restaurant.userId !== userId) {
         req.flash('error', '權限不足')
         return res.redirect('/restaurants')
       }
@@ -132,11 +132,11 @@ router.get('/:id/edit', (req, res, next) => {
     raw: true
   })
     .then((restaurant) => {
-      if(!restaurant){
+      if (!restaurant) {
         req.flash('error', '找不到資料')
         return res.redirect('/restaurants')
       }
-      if(restaurant.userId !== userId){
+      if (restaurant.userId !== userId) {
         req.flash('error', '權限不足')
         return res.redirect('/restaurants')
       }
@@ -169,11 +169,11 @@ router.put('/:id', (req, res, next) => {
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description', 'userId']
   })
     .then((restaurant) => {
-      if(!restaurant){
+      if (!restaurant) {
         req.flash('error', '找不到資料')
         return res.redirect('/restaurants')
       }
-      if(restaurant.userId !== userId){
+      if (restaurant.userId !== userId) {
         req.flash('error', '權限不足')
         return res.redirect('/restaurants')
       }
@@ -193,11 +193,11 @@ router.put('/:id', (req, res, next) => {
           req.flash('success', '編輯成功！')
           return res.redirect(`/restaurants/${id}`)
         })
-    .catch((error) => {
-      error.errorMessage = '編輯失敗：（'
-      next(error)
+        .catch((error) => {
+          error.errorMessage = '編輯失敗：（'
+          next(error)
+        })
     })
-  })  
 })
 
 router.delete('/:id', (req, res, next) => {
@@ -208,11 +208,11 @@ router.delete('/:id', (req, res, next) => {
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description', 'userId']
   })
     .then((restaurant) => {
-      if(!restaurant){
+      if (!restaurant) {
         req.flash('error', '找不到資料')
         return res.redirect('/restaurants')
       }
-      if(restaurant.userId !== userId){
+      if (restaurant.userId !== userId) {
         req.flash('error', '權限不足')
         return res.redirect('/restaurants')
       }
@@ -222,11 +222,11 @@ router.delete('/:id', (req, res, next) => {
           req.flash('success', '刪除成功！')
           return res.redirect('/restaurants')
         })
-    .catch((error) => {
-      error.errorMessage = '刪除失敗：（'
-      next(error)
+        .catch((error) => {
+          error.errorMessage = '刪除失敗：（'
+          next(error)
+        })
     })
-  })  
 })
 
 module.exports = router

@@ -22,7 +22,7 @@ router.post('/login', passport.authenticate('local', {
 
 router.post('/logout', (req, res) => {
   req.logout((error) => {
-    if(error){
+    if (error) {
       next(error)
     }
 
