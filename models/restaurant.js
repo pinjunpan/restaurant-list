@@ -10,19 +10,29 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // define association here
+      Restaurant.belongsTo(models.User)
     }
   }
   Restaurant.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     name_en: DataTypes.STRING,
-    category: DataTypes.STRING,
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     image: DataTypes.STRING,
     location: DataTypes.STRING,
     phone: DataTypes.STRING,
     google_map: DataTypes.STRING,
     rating: DataTypes.FLOAT,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Restaurant'
