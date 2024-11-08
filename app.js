@@ -7,8 +7,6 @@ const helpers = require('./helpers/handlebars-helpers')
 const app = express()
 const port = 3000
 
-const passport = require('passport')
-
 if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
@@ -17,6 +15,7 @@ const messageHandler = require('./middlewares/message-handler')
 const errorHandler = require('./middlewares/error-handler')
 
 const router = require('./routes')
+const passport = require('./config/passport')
 
 app.engine('.hbs', engine({ extname: '.hbs', helpers }))
 app.set('view engine', '.hbs')
