@@ -57,7 +57,7 @@ passport.use(new FacebookStrategy({
         .then((user) => done(null, { id: user.id, name: user.name, email: user.email }))
     })
     .catch((error) => {
-      error.errorMessage('登入失敗：（')
+      error.errorMessage = '登入失敗：（'
       done(error)
     })
 }))
